@@ -6,6 +6,13 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "App",
+			"request": "launch",
+			"mainClass": "App",
+			"projectName": "theDreamTeamOfTheInnovation_986f7af5"
+		},
+		{
+			"type": "java",
 			"name": "UsoCoche",
 			"request": "launch",
 			"mainClass": "poo.UsoCoche",
