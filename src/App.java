@@ -52,7 +52,8 @@ public class App {
       // Se recorre el Jsonarray
       JSONObject profecion = (JSONObject) perfil.get(0);
       // se imprime en pantalla los datos personales
-      System.out.println("nombre: " + author.getOrDefault("name", 0));
+      System.out.println("Id: " + authorid);
+      System.out.println("Nombre: " + author.getOrDefault("name", 0));
       System.out.println("Profeción: " + profecion.getOrDefault("title", 0));
       System.out.println(
         "Univeridad: " + author.getOrDefault("affiliations", 0)

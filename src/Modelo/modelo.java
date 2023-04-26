@@ -1,36 +1,41 @@
+package Modelo;
+
 import java.io.Serializable;
 
-public class Author implements Serializable {
+public class modelo implements Serializable {
 
+  private String authorid;
   private String nombre;
   private String afiliaciones;
   private String web;
   private String profecion;
 
-  public Author(
-    String profecion,
+  public modelo(
+    String authorid,
     String nombre,
     String afiliaciones,
-    String web
+    String web,
+    String profecion
   ) {
-    this.profecion = profecion;
+    this.authorid = authorid;
     this.nombre = nombre;
     this.afiliaciones = afiliaciones;
     this.web = web;
-  }
-
-  /**
-   * @return String return the profecion
-   */
-  public String getprofecion() {
-    return profecion;
-  }
-
-  /**
-   * @param profecion the profecion to set
-   */
-  public void setprofecion(String profecion) {
     this.profecion = profecion;
+  }
+
+  /**
+   * @return String return the authorid
+   */
+  public String getauthorid() {
+    return authorid;
+  }
+
+  /**
+   * @param authorid the authorid to set
+   */
+  public void setauthoraid(String authorid) {
+    this.authorid = authorid;
   }
 
   /**
@@ -73,6 +78,20 @@ public class Author implements Serializable {
    */
   public void setWeb(String web) {
     this.web = web;
+  }
+
+  /**
+   * @return String return the profecion
+   */
+  public String getprofecion() {
+    return profecion;
+  }
+
+  /**
+   * @param profecion the profecion to set
+   */
+  public void setprofecion(String profecion) {
+    this.profecion = profecion;
   }
 
   public void datos() {
