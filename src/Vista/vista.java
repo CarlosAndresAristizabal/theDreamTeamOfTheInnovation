@@ -37,7 +37,10 @@ public class vista {
         autor conid = new autor(id);
         conid.setId(id);
         controladorAPIAutor ctlApi = new controladorAPIAutor(id);
+        ctlApi.conexionUrl();
+        ctlApi.lecturaJson();
         ctlApi.recorrido();
+        ctlApi.resultado();
     }
 
     public void footer() {

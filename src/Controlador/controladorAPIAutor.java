@@ -13,7 +13,13 @@ import Modelo.conexionAPI;
 
 public class controladorAPIAutor {
 
-  String ids;
+  private String ids, hots;
+  JSONParser parser = new JSONParser();
+  JSONObject jsonResult, author, art = null;
+  long artDisponible, artNoDisponible, totalArticulos = 0;
+  Reader lectura;
+  BufferedReader contenido;
+  StringBuilder stringBuilder;
 
   public controladorAPIAutor(String ids) {
     this.ids = ids;
@@ -23,20 +29,20 @@ public class controladorAPIAutor {
 
   autor personaje = new autor();
 
-  public void recorrido() {
-    // Encerramos todo el código de petición en un Try/Catch
+  public void conexionUrl() {
     try {
       conexionAPI conexion = new conexionAPI();
-      String hots = conexion.getHttps() + "&author_id=" + ids + "&num=" + conexion.getNumResultado()
+      hots = conexion.getHttps() + "&author_id=" + ids + "&num=" + conexion.getNumResultado()
           + "&apikey=" +
           conexion.getApiKey();
-      Reader lectura;
+    } catch (Exception e) {
+      System.out.println("Error de I/O -----" + e.getMessage());
 
-      BufferedReader contenido;
-      StringBuilder stringBuilder;
-      JSONParser parser = new JSONParser();
-      JSONObject jsonResult, author, art = null;
-      long artDisponible, artNoDisponible, totalArticulos = 0;
+    }
+  }
+
+  public void lecturaJson() {
+    try {
       URL miUrl = new URL(hots);
       URLConnection conexionUrl = miUrl.openConnection();
       lectura = new InputStreamReader(
@@ -44,6 +50,16 @@ public class controladorAPIAutor {
           "UTF-8");
       contenido = new BufferedReader(lectura);
       stringBuilder = new StringBuilder();
+
+    } catch (Exception e) {
+      System.out.println("Error de I/O -----" + e.getMessage());
+
+    }
+  }
+
+  public void recorrido() {
+    // Encerramos todo el código de petición en un Try/Catch
+    try {
       for (int item; (item = contenido.read()) >= 0;)
         stringBuilder.append(
             (char) item);
@@ -61,17 +77,20 @@ public class controladorAPIAutor {
       artNoDisponible = (long) art.getOrDefault("not_available", 0);
       // Se suman para sacar el total de aritculos realizados.
       totalArticulos = artDisponible + artNoDisponible;
-      // se imprime en pantalla los datos personales
-      personaje.setId(ids);
-      personaje.setNombre(author.getOrDefault("name", 0).toString());
-      personaje.setAfiliaciones(author.getOrDefault("affiliations", 0).toString());
-      personaje.setWeb(author.getOrDefault("website", 0).toString());
-      personaje.setArtDisponibles((long) art.getOrDefault("available", 0));
-      personaje.setArtNoDisponibes((long) art.getOrDefault("not_available", 0));
-      personaje.setTotalArti((long) totalArticulos);
-      personaje.datos();
+
     } catch (Exception e) {
       System.out.println("Error de I/O -----" + e.getMessage());
     }
+  }
+
+  public void resultado() {
+    personaje.setId(ids);
+    personaje.setNombre(author.getOrDefault("name", 0).toString());
+    personaje.setAfiliaciones(author.getOrDefault("affiliations", 0).toString());
+    personaje.setWeb(author.getOrDefault("website", 0).toString());
+    personaje.setArtDisponibles((long) art.getOrDefault("available", 0));
+    personaje.setArtNoDisponibes((long) art.getOrDefault("not_available", 0));
+    personaje.setTotalArti((long) totalArticulos);
+    personaje.datos();
   }
 }
