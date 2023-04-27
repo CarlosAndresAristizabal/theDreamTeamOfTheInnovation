@@ -6,45 +6,10 @@
 	"configurations": [
 		{
 			"type": "java",
-			"name": "prueba",
-			"request": "launch",
-			"mainClass": "prueba",
-			"projectName": "theDreamTeamOfTheInnovation_986f7af5"
-		},
-		{
-			"type": "java",
 			"name": "App",
 			"request": "launch",
 			"mainClass": "App",
 			"projectName": "theDreamTeamOfTheInnovation_986f7af5"
-		},
-		{
-			"type": "java",
-			"name": "UsoCoche",
-			"request": "launch",
-			"mainClass": "poo.UsoCoche",
-			"projectName": "theDreamTeamOfTheInnovation_b9e2121f"
-		},
-		{
-			"type": "java",
-			"name": "Coche",
-			"request": "launch",
-			"mainClass": "poo.Coche",
-			"projectName": "theDreamTeamOfTheInnovation_b9e2121f"
-		},
-		{
-			"type": "java",
-			"name": "App",
-			"request": "launch",
-			"mainClass": "App",
-			"projectName": "theDreamTeamOfTheInnovation_b9e2121f"
-		},
-		{
-			"type": "java",
-			"name": "variables",
-			"request": "launch",
-			"mainClass": "variables",
-			"projectName": "theDreamTeamOfTheInnovation"
 		},
 		{
 			"type": "java",
