@@ -1,100 +1,64 @@
 package Modelo;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class consultasBD extends conexionBaseDatos {
+public class consultasBD {
+  private final String nombreBD = "registroinvestigadores";
+  private final String user = "root";
+  private final String password = "";
+  private final String url = "jdbc:mysql://localhost:3306/" + nombreBD;
 
-  public boolean registar(autor autor) throws ClassNotFoundException {
-    PreparedStatement ps = null;
-    Connection conexion = getConexion();
+  public boolean registar(autor autor) {
 
-    String sql =
-      "INSERT INTRO autor (Id,Nombre,Afiliacion,web,ArticulosDisponibles,ArticulosNoDisponibles,TotalArticulos) VALUES (?,?,?,?)";
     try {
-      ps = conexion.prepareStatement(sql);
-      ps.setString(1, autor.getId());
-      ps.setString(2, autor.getNombre());
-      ps.setString(3, autor.getAfiliaciones());
-      ps.setString(4, autor.getWeb());
-      ps.setLong(5, autor.getArtDisponibles());
-      ps.setLong(6, autor.getArtNoDisponibes());
-      ps.setLong(7, autor.getTotalArti());
-      ps.execute();
+      Connection conexion = DriverManager.getConnection(
+          this.url,
+          this.user,
+          this.password);
+      Statement ps = conexion.createStatement();
+      System.out.println(autor.getId());
+      String sql = "INSERT INTRO autor (Id,Nombre,Afiliacion,Web,ArticulosDisponibles,ArticulosNoDisponibles,TotalArticulos) VALUES ('"
+          + autor.getId() + "','" + autor.getNombre() + "','" + autor.getAfiliaciones() + "','" + autor.getWeb() + "','"
+          + autor.getArtDisponibles() + "','" + autor.getArtNoDisponibes() + "','" + autor.getTotalArti() + "')";
+      ps.executeUpdate(sql);
+      System.out.println(sql);
+      System.out.println("Datos ingresados correctamente");
       return true;
     } catch (SQLException e) {
+      System.out.println("NO CONECTA!!");
       System.err.println(e);
       return false;
-    } finally {
-      try {
-        conexion.close();
-      } catch (SQLException e) {
-        System.err.println(e);
-      }
     }
   }
 
-  public boolean buscar(autor autor) throws ClassNotFoundException {
-    PreparedStatement ps = null;
-    ResultSet resultado;
-    Connection conexion = getConexion();
+  public boolean ranking(autor autor) {
 
-    String sql = "SELECT * FROM author WHERE Id=?";
+    ResultSet resultado;
     try {
-      ps = conexion.prepareStatement(sql);
+      Connection conexionp = DriverManager.getConnection(
+          this.url,
+          this.user,
+          this.password);
+      String sql = "ALTER TABLE autor ORDER BY TotalArticulos DESC";
+      PreparedStatement ps = conexionp.prepareStatement(sql);
       ps.setString(1, autor.getId());
       resultado = ps.executeQuery();
       while (resultado.next()) {
-        autor.setId(resultado.getString("Id"));
-        autor.setNombre(resultado.getString("Nombre"));
-        autor.setAfiliaciones(resultado.getString("Afiliacion"));
-        autor.setWeb(resultado.getString("Web"));
-        autor.setArtDisponibles(resultado.getLong("ArticulosDisponibles"));
-        autor.setArtNoDisponibes(resultado.getLong("ArticulosNoDisponibles"));
-        autor.setTotalArti(resultado.getLong("TotalArticulos"));
+        System.out.println(resultado.getString("Id") + "  |  " + resultado.getString("Nombre") + "  |  "
+            + resultado.getLong("TotalArticulos"));
         return true;
       }
       return false;
     } catch (SQLException e) {
       System.err.println(e);
       return false;
-    } finally {
-      try {
-        conexion.close();
-      } catch (SQLException e) {
-        System.err.println(e);
-      }
     }
+
   }
 
-  public boolean ranking(autor autor) throws ClassNotFoundException {
-    PreparedStatement ps = null;
-    ResultSet resultado;
-    Connection conexion = getConexion();
-
-    String sql = "ALTER TABLE autor ORDER BY TotalArticulos DESC";
-    try {
-      ps = conexion.prepareStatement(sql);
-      ps.setString(1, autor.getId());
-      resultado = ps.executeQuery();
-      while (resultado.next()) {
-        autor.setId(resultado.getString("Id"));
-        autor.setNombre(resultado.getString("Nombre"));
-        autor.setTotalArti(resultado.getLong("TotalArticulos"));
-        return true;
-      }
-      return false;
-    } catch (SQLException e) {
-      System.err.println(e);
-      return false;
-    } finally {
-      try {
-        conexion.close();
-      } catch (SQLException e) {
-        System.err.println(e);
-      }
-    }
-  }
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class autor implements Serializable {
 
-  private String id, nombre, afiliaciones, web;
+  private String id, nombre, afiliaciones, web, apikey;
   private long artDisponibles, artNoDisponibes, totalArti;
 
   public autor(String id) {
@@ -20,6 +20,7 @@ public class autor implements Serializable {
       String nombre,
       String afiliaciones,
       String web,
+      String apikey,
       long artDisponible,
       long artNoDisponibes,
       long totalArti) {
@@ -27,6 +28,7 @@ public class autor implements Serializable {
     this.nombre = nombre;
     this.afiliaciones = afiliaciones;
     this.web = web;
+    this.apikey = apikey;
     this.artDisponibles = artDisponible;
     this.artNoDisponibes = artNoDisponibes;
     this.totalArti = totalArti;
@@ -64,6 +66,14 @@ public class autor implements Serializable {
     this.web = web;
   }
 
+  public String getApikey() {
+    return apikey;
+  }
+
+  public void setApikey(String apikey) {
+    this.apikey = apikey;
+  }
+
   public long getArtDisponibles() {
     return artDisponibles;
   }
@@ -99,4 +109,5 @@ public class autor implements Serializable {
     System.out.println("Total de articulos: " + totalArti);
     System.out.println("/*----------------------------------- */");
   }
+
 }
