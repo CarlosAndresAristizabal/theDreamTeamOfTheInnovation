@@ -152,7 +152,8 @@ public class controladorAPIAutor {
       String sql = "SELECT * FROM autor ORDER BY TotalArticulos DESC";
       PreparedStatement ps = conexionBDTop.prepareStatement(sql);
       ResultSet resultado = ps.executeQuery();
-      while (resultado.next()) {
+      for (int item = 0; item < 10; item++) {
+        resultado.next();
         System.out.println(resultado.getString(1) + "  |  " + resultado.getString(2) + "  |  "
             + resultado.getLong(7));
       }
