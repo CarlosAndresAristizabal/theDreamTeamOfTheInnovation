@@ -2,19 +2,26 @@ package Modelo;
 
 import java.io.Serializable;
 
+/*
+ * Creamos un clase llamada autor que tendra las variables requeridas
+ */
 public class autor implements Serializable {
-
+  // variable string
   private String id, nombre, afiliaciones, web, apikey;
+  // variables long
   private long artDisponibles, artNoDisponibes, totalArti;
 
+  // construtor con un paramaetro ID
   public autor(String id) {
     this.id = id;
   }
 
+  // constructor vacio
   public autor() {
 
   }
 
+  // constructor con todas la variables
   public autor(
       String id,
       String nombre,
@@ -34,6 +41,7 @@ public class autor implements Serializable {
     this.totalArti = totalArti;
   }
 
+  // Getters y setters
   public void setId(String id) {
     this.id = id;
   }
@@ -98,6 +106,7 @@ public class autor implements Serializable {
     this.totalArti = totalArti;
   }
 
+  // metodo de impresion de datos
   public void datos() {
     System.out.println("/*----------------------------------- */");
     System.out.println("Id: " + id);
