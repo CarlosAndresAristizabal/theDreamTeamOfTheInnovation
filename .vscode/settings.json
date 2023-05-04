@@ -2,7 +2,7 @@
 	"java.project.sourcePaths": ["src"],
 	"java.project.outputPath": "bin",
 	"java.project.referencedLibraries": {
-		"include": ["lib/**/*.jar"],
+		"include": ["lib/**/*.jar", "test-lib\\**\\*.jar"],
 		"exclude": [
 			"lib/jackson-databind-2.15.0.jar",
 			"lib/jackson-annotations-2.15.0.jar",

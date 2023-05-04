@@ -192,14 +192,12 @@ public class controladorAPIAutor {
       e.printStackTrace();
     }
   }
-  // metodo de TOP 10 de BD
 
+  // metodo de TOP 10 de BD
   public void consultaTop() {
     // Encerramos todo el código de petición en un Try/Catch
-
     try {
       // Hacemos conexion de a la base de datos
-
       Connection conexionBDTop = DriverManager.getConnection(
           "jdbc:mysql://localhost:3306/registroinvestigadores",
           "root",

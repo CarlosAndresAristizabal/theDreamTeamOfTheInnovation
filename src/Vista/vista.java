@@ -14,7 +14,7 @@ public class vista {
     public void head() {
         System.out.println("//**************************************************//");
         System.out.println("//*                                                *//");
-        System.out.println("//*              GOOGLE SCHOLAR API                 *//");
+        System.out.println("//*              GOOGLE SCHOLAR API                *//");
         System.out.println("//*                                                *//");
         System.out.println("//**************************************************//");
     }
